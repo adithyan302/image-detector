@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Loop</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        img {
+            cursor: pointer;
+            width: 300px;
+            height: auto;
+            transition: transform 0.2s;
+        }
+        img:hover {
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body>
+    <div id="content">
+        <img src="image1.jpg" alt="Image 1" onclick="nextPage(1)">
+    </div>
+
+    <script>
+        const pages = [
+            { image: 'image1.jpg', alt: 'Image 1' },
+            { image: 'image2.jpg', alt: 'Image 2' },
+            { image: 'image3.jpg', alt: 'Image 3' }
+        ];
+        let currentIndex = 0;
+
+        function nextPage(step) {     
+            currentIndex += step;
+            if (currentIndex >= pages.length) {
+                currentIndex = 0; // Loop back to start
+            }
+            updateContent();
+        }
+
+        function updateContent() {
+            const contentDiv = document.getElementById('content');
+            const currentPage = pages[currentIndex];
+            contentDiv.innerHTML = `<img src="${currentPage.image}" alt="${currentPage.alt}" onclick="nextPage(1)">`;
+        }
+    </script>
+</body>
+</html>
